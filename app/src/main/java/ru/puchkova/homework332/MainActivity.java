@@ -1,5 +1,6 @@
 package ru.puchkova.homework332;
 
+import androidx.annotation.IntDef;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.Configuration;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         languageSpinner.setAdapter(adapterLanguage);
     }
 
+
     private void initSpinnerColor() {
         ArrayAdapter<CharSequence> adapterColor = ArrayAdapter.createFromResource(this, R.array.color, android.R.layout.simple_spinner_item);
         adapterColor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,31 +66,28 @@ public class MainActivity extends AppCompatActivity {
             getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
             recreate();
 
-            int color = chooseColor();
+            int color = colorSpinner.getSelectedItemPosition();;
             setColor(color);
         }
     };
 
-    private int chooseColor(){
-        if (colorSpinner.getSelectedItem().toString().equalsIgnoreCase("Green") || colorSpinner.getSelectedItem().toString().equalsIgnoreCase("Зелёный")){
-            return 1;
-        } else if (colorSpinner.getSelectedItem().toString().equalsIgnoreCase("red") || colorSpinner.getSelectedItem().toString().equalsIgnoreCase("красный")){
-            return 2;
-        } else {
-            return 3;
-        }
+    @IntDef({Color.RED, Color.GREEN, Color.BLUE})
+    private @interface Color {
+        int RED = 0;
+        int GREEN = 1;
+        int BLUE = 2;
     }
 
     private void setColor(int color){
         switch (color){
+            case 0:
+                Utils.changeToTheme(this, Utils.THEME_RED);
+                break;
             case 1:
                 Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 break;
-            case 3:
-                Utils.changeToTheme(this, Utils.THEME_BLUE);
-                break;
             case 2:
-                Utils.changeToTheme(this, Utils.THEME_RED);
+                Utils.changeToTheme(this, Utils.THEME_BLUE);
                 break;
         }
     }

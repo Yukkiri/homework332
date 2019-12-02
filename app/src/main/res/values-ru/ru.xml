@@ -2,10 +2,6 @@
 <resources>
     <string name="app_name">Домашняя работа 3.3.2</string>
     <string name="OK">принять</string>
-    <string-array name="language">
-        <item>Русский</item>
-        <item>English</item>
-    </string-array>
     <string-array name="color">
         <item>Красный</item>
         <item>Зелёный</item>
